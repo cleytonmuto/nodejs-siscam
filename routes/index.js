@@ -5,7 +5,7 @@ const router = express.Router();
 
 // custom routes
 const authRoutes = require('./auth.routes');
-const advogadoRoutes = require('./advogado.routes');
+const usuarioRoutes = require('./usuario.routes');
 const tituloRoutes = require('./titulo.routes');
 const relacaoRoutes = require('./relacao.routes');
 
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.use('/api/auth', authRoutes);
-router.use('/api/advogados', advogadoRoutes );
+router.use('/api/usuarios', usuarioRoutes );
 router.use('/api/titulos', tituloRoutes);
 router.use('/api/relacoes', relacaoRoutes);
 

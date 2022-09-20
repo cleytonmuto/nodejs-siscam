@@ -1,11 +1,11 @@
 'use strict';
 
 const config = require('../config/db.config');
-const advogadoModel = require('./advogado.model');
 const usuarioModel = require('./usuario.model');
-const relacaoModel = require('./emprestimo.model');
-const roleModel = require('../models/role.model');
-const userRolesModel = require('../models/user_roles.model');
+const roleModel = require('./role.model');
+const tituloModel = require('./titulo.model');
+const usuarioRoleModel = require('./usuario_role.model');
+const usuarioTituloModel = require('./usuario_titulo.model');
 
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(
@@ -39,23 +39,35 @@ db.sequelize = sequelize;
 db.DataTypes = DataTypes;
 
 db.usuario = usuarioModel(sequelize, DataTypes);
-db.obra = obraModel(sequelize, DataTypes);
-db.emprestimo = emprestimoModel(sequelize, DataTypes);
 db.role = roleModel(sequelize, DataTypes);
-db.user_roles = userRolesModel(sequelize, DataTypes);
+db.titulo = tituloModel(sequelize, DataTypes);
+db.usuario_role = usuarioRoleModel(sequelize, DataTypes);
+db.usuario_titulo = usuarioTituloModel(sequelize, DataTypes);
 
-db.ROLES = ['user', 'admin'];
+db.PERFIS = ['user', 'admin'];
 
 db.role.belongsToMany(db.usuario, {
-  through: 'user_roles',
+  through: 'usuarios_perfis',
   foreignKey: 'roleId',
-  otherKey: 'userId',
+  otherKey: 'usuarioId',
 });
 
 db.usuario.belongsToMany(db.role, {
-  through: 'user_roles',
-  foreignKey: 'userId',
+  through: 'usuarios_perfis',
+  foreignKey: 'usuarioId',
   otherKey: 'roleId',
+});
+
+db.titulo.belongsToMany(db.usuario, {
+  through: 'usuarios_titulos',
+  foreignKey: 'tituloId',
+  otherKey: 'usuarioId',
+});
+
+db.usuario.belongsToMany(db.titulo, {
+  through: 'usuarios_titulos',
+  foreignKey: 'usuarioId',
+  otherKey: 'tituloId',
 });
 
 module.exports = db;

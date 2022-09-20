@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const Advogado = sequelize.define('advogado', {
+    const Usuario = sequelize.define('usuarios', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -34,10 +34,14 @@ module.exports = (sequelize, DataTypes) => {
         observacao: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        password: {
+          type: DataTypes.STRING,
+          allowNull: false
         }
     }, {
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_520_ci'
     });
-    return Advogado;
+    return Usuario;
 };

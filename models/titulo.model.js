@@ -1,13 +1,13 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const Titulo = sequelize.define('titulo', {
+    const Titulo = sequelize.define('titulos', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nTitulo: {
+        numero: {
             type: DataTypes.STRING,
             allowNull: false
         },
