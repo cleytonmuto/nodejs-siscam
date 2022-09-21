@@ -57,7 +57,7 @@ const findAll = (req, res) => {
         limit: limit,
         offset: offset,
         order: [
-            ['name', 'ASC']
+            ['nome', 'ASC']
         ]
     })
     .then((data) => {
@@ -117,11 +117,11 @@ const findNames = (req, res) => {
   const page = parseInt(req.query.page) || 1
   const offset = (page - 1) * limit;
   Usuario.findAll({
-      attributes: ['id', 'name'],
+      attributes: ['id', 'nome'],
       limit: limit,
       offset: offset,
       order: [
-          ['name', 'ASC']
+          ['nome', 'ASC']
       ]
   })
   .then((data) => {

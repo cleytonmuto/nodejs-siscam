@@ -4,7 +4,7 @@ const express = require('express');
 const relacaoRouter = express.Router();
 
 const authJwt = require('../middleware/authJwt');
-const controller = require('../controllers/emprestimo.controller');
+const controller = require('../controllers/relacao.controller');
 
 relacaoRouter.get('/all', [authJwt.verifyToken, authJwt.isAdmin], controller.findAll);
 relacaoRouter.get('/404', controller.pageNotFound);
