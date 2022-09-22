@@ -57,7 +57,7 @@ const findAll = (req, res) => {
         limit: limit,
         offset: offset,
         order: [
-            ['nome', 'ASC']
+            ['id', 'ASC']
         ]
     })
     .then((data) => {
