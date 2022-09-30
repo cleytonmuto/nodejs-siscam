@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        servico: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
         arbitrado: {
             type: DataTypes.DECIMAL,
             allowNull: false
