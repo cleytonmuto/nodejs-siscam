@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        servico: {
+          type: DataTypes.TEXT,
+          allowNull: false
+        },
         acesso: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        servico: {
-            type: DataTypes.TEXT,
             allowNull: false
         },
         arbitrado: {
