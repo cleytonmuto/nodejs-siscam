@@ -22,7 +22,8 @@ const create = (req, res) => {
         arbitrado: req.body.arbitrado,
         pleiteado: req.body.pleiteado,
         acordado: req.body.acordado,
-        judicial: req.body.judicial
+        judicial: req.body.judicial,
+        situacao: req.body.situacao
     };
 
     // Salva o titulo na base
@@ -67,7 +68,7 @@ const findReducedAll = (req, res) => {
     const page = parseInt(req.query.page) || 1
     const offset = (page - 1) * limit;
     Titulo.findAll({
-        attributes: ['id', 'numero', 'assistido', 'acesso', 'arbitrado', 'pleiteado', 'acordado', 'judicial'],
+        attributes: ['id', 'numero', 'assistido', 'acesso', 'arbitrado', 'pleiteado', 'acordado', 'judicial', 'situacao'],
         limit: limit,
         offset: offset
     }).then((data) => {
@@ -108,7 +109,8 @@ const findSome = (req, res) => {
             { arbitrado: { [Op.like]: `%${termo}%` }},
             { pleiteado: { [Op.like]: `%${termo}%` } },
             { acordado: { [Op.like]: `%${termo}%` }},
-            { judicial: { [Op.like]: `%${termo}%` } }
+            { judicial: { [Op.like]: `%${termo}%` } },
+            { situacao: { [Op.like]: `%${termo}%` } },
         ]
     } : null;
     Titulo.findAll({ limit, offset, where: condition })
