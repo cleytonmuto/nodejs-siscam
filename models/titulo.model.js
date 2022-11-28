@@ -24,15 +24,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         arbitrado: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.STRING,
             allowNull: false
         },
         pleiteado: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.STRING,
             allowNull: false
         },
         acordado: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.STRING,
             allowNull: false
         },
         judicial: {
