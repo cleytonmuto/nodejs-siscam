@@ -16,6 +16,7 @@ const create = (req, res) => {
 
     // Propriedades do objeto titulo
     const titulo = {
+        advogado: req.body.advogado,
         numero: req.body.numero,
         assistido: req.body.assistido,
         acesso: req.body.acesso,
@@ -68,7 +69,7 @@ const findReducedAll = (req, res) => {
     const page = parseInt(req.query.page) || 1
     const offset = (page - 1) * limit;
     Titulo.findAll({
-        attributes: ['id', 'numero', 'assistido', 'acesso', 'arbitrado', 'pleiteado', 'acordado', 'judicial', 'situacao'],
+        attributes: ['id', 'advogado', 'numero', 'assistido', 'acesso', 'arbitrado', 'pleiteado', 'acordado', 'judicial', 'situacao'],
         limit: limit,
         offset: offset
     }).then((data) => {
@@ -103,6 +104,7 @@ const findSome = (req, res) => {
     const termo = req.body.termo;
     const condition = termo ? {
         [Op.or] : [
+            { advogado: { [Op.like]: `%${termo}%` } },
             { numero: { [Op.like]: `%${termo}%` } },
             { assistido: { [Op.like]: `%${termo}%` } },
             { acesso: { [Op.like]: `%${termo}%` } },
