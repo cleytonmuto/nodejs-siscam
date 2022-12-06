@@ -7,6 +7,7 @@ const authJwt = require('../middleware/authJwt');
 const controller = require('../controllers/usuario.controller');
 
 usuarioRouter.get('/all', controller.findAll);
+usuarioRouter.get('/short', controller.findShort);
 usuarioRouter.get('/404', controller.pageNotFound);
 usuarioRouter.get('/:id', controller.findOne);
 

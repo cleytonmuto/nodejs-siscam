@@ -70,6 +70,31 @@ const findAll = (req, res) => {
     });
 };
 
+// Retorna informacoes resumidas dos usuarios
+const findShort = (req, res) => {
+  console.log('usuario.controller findShort()');
+  console.log('tentativa de acesso');
+  const limit = parseInt(req.query.limit) || 20
+  const page = parseInt(req.query.page) || 1
+  const offset = (page - 1) * limit;
+  Usuario.findAll({
+      attributes: ['id', 'nome', 'oab', 'cpf', 'telefone', 'email', 'endereco', 'observacao'],
+      limit: limit,
+      offset: offset,
+      order: [
+          ['id', 'ASC']
+      ]
+  })
+  .then((data) => {
+      res.status(200).send(data);
+  })
+  .catch((err) => {
+      res.status(500).send({
+          message: err.message || 'Erro ao consultar usuário.'
+      });
+  });
+};
+
 // Encontra um unico usuario na base
 const findOne = (req, res) => {
     const id = req.params.id;
@@ -175,5 +200,5 @@ const exclude = (req, res) => {
     });
 };
 
-module.exports = { create, pageNotFound, findAll, findOne,
+module.exports = { create, pageNotFound, findAll, findShort, findOne,
     findSome, findNames, update, exclude };
