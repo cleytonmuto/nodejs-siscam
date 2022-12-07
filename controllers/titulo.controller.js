@@ -62,6 +62,26 @@ const findAll = (req, res) => {
         });
     });
 };
+const findShort = (req, res) => {
+    const limit = parseInt(req.query.limit) || 20
+    const page = parseInt(req.query.page) || 1
+    const offset = (page - 1) * limit;
+    Titulo.findAll({
+        attributes:['id','advogado','numero','assistido','servico','acesso','arbitrado','pleiteado','acordado', 'judicial','situacao'],
+        limit: limit,
+        offset: offset,
+        order: [
+            [ 'id', 'ASC' ]
+        ]
+    }).then((data) => {
+        res.status(200).send(data);
+    })
+    .catch((err) => {
+        res.status(500).send({
+            message: err.message || 'Erro ao consultar título.'
+        });
+    });
+};
 
 // Retorna todos os titulos
 const findReducedAll = (req, res) => {
@@ -171,5 +191,5 @@ const exclude = (req, res) => {
     });
 };
 
-module.exports = { create, findAll, findReducedAll, findOne,
+module.exports = { create, findAll, findShort, findReducedAll, findOne,
     findSome, pageNotFound, update, exclude };
