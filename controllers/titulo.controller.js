@@ -62,6 +62,20 @@ const findAll = (req, res) => {
         });
     });
 };
+
+//Contar linhas
+const countRows = (req, res) =>{
+    Titulo.findAndCountAll()
+    .then((data) => {
+        res.status(200).send(data.count);
+      ;// console.log(data.count)
+    })
+    .catch((err) => {
+        res.status(500).send({
+            message: err.message || 'Erro ao consultar número de título.'
+        });
+    });
+}
 const findShort = (req, res) => {
     const limit = parseInt(req.query.limit) || 20
     const page = parseInt(req.query.page) || 1
@@ -191,5 +205,5 @@ const exclude = (req, res) => {
     });
 };
 
-module.exports = { create, findAll, findShort, findReducedAll, findOne,
+module.exports = { create, findAll, countRows, findShort, findReducedAll, findOne,
     findSome, pageNotFound, update, exclude };

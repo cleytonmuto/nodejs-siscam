@@ -8,6 +8,7 @@ const controller = require('../controllers/titulo.controller');
 
 tituloRouter.get('/all', controller.findAll);
 tituloRouter.get('/short', controller.findShort);
+tituloRouter.get('/countRows', controller.countRows);
 tituloRouter.get('/404', controller.pageNotFound);
 tituloRouter.get('/:id', controller.findOne);
 

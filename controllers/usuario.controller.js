@@ -70,6 +70,7 @@ const findAll = (req, res) => {
     });
 };
 
+
 // Retorna informacoes resumidas dos usuarios
 const findShort = (req, res) => {
   console.log('usuario.controller findShort()');
