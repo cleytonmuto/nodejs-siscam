@@ -65,10 +65,14 @@ const findAll = (req, res) => {
 
 //Contar linhas
 const countRows = (req, res) =>{
-    Titulo.findAndCountAll()
+    Titulo.count()
     .then((data) => {
-        res.status(200).send(data.count);
-      ;// console.log(data.count)
+        let countRows = {
+            numLinhas: data
+        }
+        console.log(countRows)
+        res.status(200).send(countRows);
+     
     })
     .catch((err) => {
         res.status(500).send({
