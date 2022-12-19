@@ -8,9 +8,9 @@ const bcrypt = require('bcryptjs');
 // Cria e salva um novo usuario
 const create = (req, res) => {
     // Valida requisicao
-    if (!req.body.inscription) {
+    if (!req.body.oab) {
         res.status(400).send({
-            message: 'Conteúdo não pode ser vazio.'
+            message: 'OAB não pode ser vazio.'
         });
         return;
     }
