@@ -153,9 +153,11 @@ const findSome = (req, res) => {
             { situacao: { [Op.like]: `%${termo}%` } },
         ]
     } : null;
-    Titulo.findAll({ limit, offset, where: condition })
+
+    Titulo.findAndCountAll({ limit, offset, where: condition })
     .then((data) => {
         res.status(200).send(data);
+      
     })
     .catch((err) => {
         res.status(500).send({
