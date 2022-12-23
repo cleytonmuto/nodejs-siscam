@@ -8,9 +8,10 @@ const bcrypt = require('bcryptjs');
 // Cria e salva um novo usuario
 const create = (req, res) => {
     // Valida requisicao
-    if (!req.body.inscription) {
+    if (!req.body.oab) {
         res.status(400).send({
-            message: 'Conteúdo não pode ser vazio.'
+            message: 'OAB não pode ser vazio.',
+            type: 'error'
         });
         return;
     }
@@ -32,12 +33,14 @@ const create = (req, res) => {
         .then((data) => {
             res.status(200).send({
                 data: data,
-                message: 'Usuário cadastrado com sucesso.'
+                message: 'Usuário cadastrado com sucesso.',
+                type: 'success'
             });
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || 'Erro ao inserir usuário.'
+                message: err.message || 'Erro ao inserir usuário.',
+                type: 'error'
             });
         });
 };
