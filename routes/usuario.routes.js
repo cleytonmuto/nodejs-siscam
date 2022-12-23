@@ -13,8 +13,7 @@ usuarioRouter.get('/:id', controller.findOne);
 
 usuarioRouter.post('/add', controller.create);
 usuarioRouter.post('/search', controller.findSome);
-usuarioRouter.post('/update', [authJwt.verifyToken, authJwt.isAdmin],
-  controller.update)
+usuarioRouter.post('/update', controller.update);
 
 usuarioRouter.delete('/delete', [authJwt.verifyToken, authJwt.isAdmin],
   controller.exclude);
