@@ -7,9 +7,10 @@ const Op = db.Sequelize.Op;
 // Cria e salvar um novo titulo
 const create = (req, res) => {
     // Valida requisicao
-    if (!req.body.titulo) {
+    if (!req.body.numero) {
         res.status(400).send({
-            message: 'Conteúdo não pode ser vazio.'
+            message: 'Conteúdo não pode ser vazio.',
+            type: 'error'
         });
         return;
     }
@@ -19,6 +20,7 @@ const create = (req, res) => {
         advogado: req.body.advogado,
         numero: req.body.numero,
         assistido: req.body.assistido,
+        servico: req.body.servico,
         acesso: req.body.acesso,
         arbitrado: req.body.arbitrado,
         pleiteado: req.body.pleiteado,
@@ -32,12 +34,14 @@ const create = (req, res) => {
         .then((data) => {
             res.status(200).send({
                 data: data,
-                message: 'Título cadastrado com sucesso.'
+                message: 'Título cadastrado com sucesso.',
+                type: 'success'
             });
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || 'Erro ao inserir título.'
+                message: err.message || 'Erro ao inserir título.',
+                type: 'error'
             });
         });
 };

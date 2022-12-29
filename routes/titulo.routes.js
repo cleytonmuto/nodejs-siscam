@@ -12,8 +12,7 @@ tituloRouter.get('/countRows', controller.countRows);
 tituloRouter.get('/404', controller.pageNotFound);
 tituloRouter.get('/:id', controller.findOne);
 
-tituloRouter.post('/add', [authJwt.verifyToken, authJwt.isAdmin],
-  controller.create);
+tituloRouter.post('/add', controller.create);
 tituloRouter.post('/search', controller.findSome);
 tituloRouter.post('/update', [authJwt.verifyToken, authJwt.isAdmin],
   controller.update)
