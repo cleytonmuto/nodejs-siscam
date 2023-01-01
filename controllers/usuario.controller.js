@@ -130,7 +130,9 @@ const findSome = (req, res) => {
             { observacao: { [Op.like]: `%${termo}%` }}
         ]
     } : null;
-    Usuario.findAndCountAll({ limit, offset, where: condition })
+    Usuario.findAndCountAll({ 
+        attributes: ['id','nome', 'oab', 'cpf', 'telefone', 'email'],
+        limit, offset, where: condition })
     .then((data) => {
         res.status(200).send(data);
     })

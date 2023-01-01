@@ -158,7 +158,9 @@ const findSome = (req, res) => {
         ]
     } : null;
 
-    Titulo.findAndCountAll({ limit, offset, where: condition })
+    Titulo.findAndCountAll({ 
+        attributes: ['id', 'advogado', 'numero', 'assistido', 'acesso', 'arbitrado', 'pleiteado', 'acordado', 'judicial', 'situacao'],
+          limit, offset, where: condition })
     .then((data) => {
         res.status(200).send(data);
       
