@@ -2,15 +2,13 @@
 
 const express = require('express');
 const app = express();
+const path = require('path');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const db = require('./models');
-const dotenv = require('dotenv');
-const path = require('path');
-
 const routes = require('./routes');
-
-global.__basedir = __dirname;
 
 db.sequelize.sync();
 
@@ -20,14 +18,11 @@ app.use(cors({
   preflightContinue: false
 }));
 
-const publicFolder = path.join(__dirname,'public');
-
-app.use(express.static(publicFolder));
+global.__basedir = __dirname;
+app.use(express.static(path.join(__dirname,'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
-
-dotenv.config();
 
 const PORT = process.env.PORT || 7000;
 
