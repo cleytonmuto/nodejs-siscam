@@ -9,27 +9,27 @@ const usuarioTituloModel = require('./usuario_titulo.model');
 
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(
-    config.DB,
-    config.USER,
-    config.PASSWORD,
-    {
-        define: {
-            charset: 'utf8mb4',
-            collate: 'utf8mb4_unicode_520_ci',
-            timestamps: true
-        },
-        host: config.HOST,
-        dialect: config.dialect,
-        logging: console.log,
-        operatorAliases: false,
-        pool: {
-            max: config.pool.max,
-            min: config.pool.min,
-            acquire: config.pool.acquire,
-            idle: config.pool.idle
-        },
-        timezone: config.timezone
-    }
+  config.DB,
+  config.USER,
+  config.PASSWORD,
+  {
+    define: {
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_unicode_520_ci',
+      timestamps: true
+    },
+    host: config.HOST,
+    dialect: config.dialect,
+    logging: console.log,
+    operatorAliases: false,
+    pool: {
+      max: config.pool.max,
+      min: config.pool.min,
+      acquire: config.pool.acquire,
+      idle: config.pool.idle
+    },
+    timezone: config.timezone
+  }
 );
 
 const db = Object.create(null);
