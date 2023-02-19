@@ -43,7 +43,7 @@ const signUp = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: err.message });
+      res.status(500).send({ message: err.message || 'Erro ao cadastrar usuário.' });
     });
 }
 
@@ -72,9 +72,9 @@ const signIn = (req, res) => {
       });
       const authorities = [];
       user.getRoles().then((perfis) => {
-        for (let i = 0; i < perfis.length; i++) {
-          authorities.push(`ROLE${perfis[i].name.toUpperCase()}`);
-        }
+        perfis.forEach((perfil) => {
+          authorities.push(`ROLE${perfil.name.toUpperCase()}`);
+        });
         res.status(200).send({
           id: user.id,
           nome: user.nome,
@@ -92,7 +92,7 @@ const signIn = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err + 'Senha ou usuário inválidos.'
+        message: `${err}: Senha ou usuário inválidos.`
       });
     });
 }
@@ -132,7 +132,7 @@ const changePass = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({ message: err.message });
+      res.status(500).send({ message: err.message || 'Erro ao alterar senha.' });
     });
 }
 
@@ -154,7 +154,7 @@ const changeNewPass = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({ message: err.message });
+      res.status(500).send({ message: err.message || 'Erro ao alterar senha.' });
     });
 }
 
