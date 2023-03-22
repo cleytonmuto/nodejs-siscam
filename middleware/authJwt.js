@@ -6,16 +6,21 @@ const db = require('../models');
 const Usuario = db.usuario;
 
 const verifyToken = (req, res, next) => {
+  if (req.headers.authorization === undefined) {
+    return res.status(403).send({
+      message: 'Acesso não autorizado.'
+    });
+  }
   const token = req.headers.authorization.split(' ')[1]
   if (!token) {
     return res.status(403).send({
-      message: 'Nenhum token fornecido.'
+      message: 'Acesso não autorizado.'
     });
   }
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        message: 'Não autorizado.'
+        message: 'Acesso não autorizado.'
       });
     }
     req.userId = decoded.id;
@@ -33,7 +38,7 @@ const isAdmin = (req, res, next) => {
         }
       }
       res.status(403).send({
-        message: 'Requer perfil de administrador.'
+        message: 'Acesso não autorizado.'
       });
       return;
     });
