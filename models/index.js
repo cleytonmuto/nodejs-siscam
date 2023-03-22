@@ -44,16 +44,16 @@ db.titulo = tituloModel(sequelize, DataTypes);
 db.usuario_role = usuarioRoleModel(sequelize, DataTypes);
 db.usuario_titulo = usuarioTituloModel(sequelize, DataTypes);
 
-db.PERFIS = ['user', 'admin'];
+db.ROLES = ['user', 'admin'];
 
 db.role.belongsToMany(db.usuario, {
-  through: 'usuarios_perfis',
+  through: 'usuarios_roles',
   foreignKey: 'roleId',
   otherKey: 'usuarioId',
 });
 
 db.usuario.belongsToMany(db.role, {
-  through: 'usuarios_perfis',
+  through: 'usuarios_roles',
   foreignKey: 'usuarioId',
   otherKey: 'roleId',
 });

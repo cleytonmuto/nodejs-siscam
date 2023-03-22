@@ -22,16 +22,16 @@ const signUp = (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8)
   })
     .then((user) => {
-      if (req.body.perfis) {
+      if (req.body.roles) {
         Role.findAll({
           where: {
             name: {
-              [Op.or]: req.body.perfis
+              [Op.or]: req.body.roles
             }
           }
         })
-          .then((perfis) => {
-            user.setRoles(perfis).then(() => {
+          .then((roles) => {
+            user.setRoles(roles).then(() => {
               res.send({ message: 'Usuário cadastrado com sucesso.' });
             });
           });
@@ -71,9 +71,9 @@ const signIn = (req, res) => {
         expiresIn: 86400 // 24 hours
       });
       const authorities = [];
-      user.getRoles().then((perfis) => {
-        perfis.forEach((perfil) => {
-          authorities.push(`ROLE${perfil.name.toUpperCase()}`);
+      user.getRoles().then((roles) => {
+        roles.forEach((role) => {
+          authorities.push(`ROLE${role.name.toUpperCase()}`);
         });
         res.status(200).send({
           id: user.id,
